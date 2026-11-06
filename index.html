@@ -1,0 +1,465 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="referrer" content="strict-origin-when-cross-origin">
+<meta name="robots" content="index,follow,max-image-preview:large">
+<title>ZentBuy spreadsheet : catégories, tailles et guide QC</title>
+<meta name="description" content="Comprendre un ZentBuy spreadsheet : trier les catégories, comparer les tailles, lire les photos QC et préparer son budget avant de choisir un article.">
+<meta name="theme-color" content="#342139">
+<meta property="og:type" content="website">
+<meta property="og:locale" content="fr_FR">
+<meta property="og:title" content="ZentBuy spreadsheet — Le carnet de sélection">
+<meta property="og:description" content="Des catégories claires et des conseils concrets pour comparer les tailles, les photos et le coût total avant une commande.">
+<meta name="twitter:card" content="summary">
+<link rel="preconnect" href="https://static.nike.com" crossorigin>
+<style>
+:root{--paper:#f7f4ec;--ink:#342139;--muted:#655e65;--line:#d9d2d4;--lime:#e2ed96;--white:#fffdf9;--radius:18px}
+*{box-sizing:border-box}
+html{color-scheme:light}
+body{margin:0;background:var(--paper);color:var(--ink);font:16px/1.7 system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif}
+a{color:inherit;text-underline-offset:4px}
+a:focus-visible,summary:focus-visible{outline:3px solid #8c5039;outline-offset:5px}
+a:hover{text-decoration-thickness:2px}
+img{max-width:100%;display:block}
+h1,h2,h3,p{margin-top:0}
+h1,h2,h3{line-height:1.13;text-wrap:balance}
+h1{font-size:clamp(2.5rem,5.9vw,5.3rem);letter-spacing:-.055em;margin-bottom:24px}
+h2{font-size:clamp(1.8rem,3vw,2.7rem);letter-spacing:-.035em}
+h3{font-size:1.3rem}
+p{margin-bottom:18px}
+.wrap{width:min(1180px,calc(100% - 40px));margin:auto}
+.top{background:var(--ink);color:var(--paper)}
+.masthead{display:flex;justify-content:space-between;align-items:center;gap:18px;padding:22px 0}
+.brand{font-weight:850;letter-spacing:-.03em;font-size:1.35rem;text-decoration:none}
+.edition{font-size:.76rem;letter-spacing:.13em;text-transform:uppercase}
+.category-section{padding:27px 0 30px;border-bottom:1px solid var(--line)}
+.section-label{font-size:.76rem;text-transform:uppercase;letter-spacing:.15em;font-weight:750;margin-bottom:14px}
+.categories{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:9px}
+.categories a{display:flex;align-items:center;justify-content:space-between;gap:7px;min-height:56px;padding:12px 14px;border:1px solid var(--line);border-radius:9px;background:var(--white);text-decoration:none;font-size:.88rem;font-weight:650}
+.categories a:hover{background:var(--lime);border-color:var(--ink)}
+.categories span{font-weight:400}
+.hero{display:grid;grid-template-columns:1.1fr 1fr;gap:48px;align-items:center;padding:58px 0}
+.eyebrow{display:inline-block;font-size:.76rem;letter-spacing:.13em;text-transform:uppercase;font-weight:750;margin-bottom:19px}
+.lead{font-size:1.16rem;line-height:1.65}
+.button{display:inline-flex;align-items:center;justify-content:center;gap:24px;background:var(--ink);color:white;padding:14px 20px;border-radius:8px;text-decoration:none;font-weight:700}
+.button:hover{background:#513258}
+.small{font-size:.86rem;color:var(--muted)}
+.hero figure{margin:0;background:#edece8;border-radius:var(--radius);overflow:hidden}
+.hero img{width:100%;aspect-ratio:1;object-fit:contain;background:#f4f4f4}
+.hero figcaption{padding:16px 20px;font-size:.82rem}
+.answer{background:var(--lime);padding:27px 30px;border-radius:var(--radius);display:grid;grid-template-columns:1fr 2fr;gap:30px}
+.answer h2{font-size:1.7rem;margin:0}
+.answer p{margin:0}
+.section{padding:65px 0;border-bottom:1px solid var(--line)}
+.section-head{display:flex;justify-content:space-between;gap:35px;align-items:baseline}
+.section-head p{max-width:440px;color:var(--muted)}
+.steps{display:grid;grid-template-columns:repeat(3,1fr);gap:19px}
+.step{background:var(--white);border:1px solid var(--line);padding:26px;border-radius:var(--radius)}
+.number{display:block;font-size:.8rem;letter-spacing:.12em;margin-bottom:27px}
+.step p:last-child{margin-bottom:0}
+.journal{display:grid;grid-template-columns:1fr 1fr;gap:30px}
+.story{background:var(--white);border:1px solid var(--line);border-radius:var(--radius);overflow:hidden}
+.story img{width:100%;height:auto;aspect-ratio:4/3;object-fit:cover;background:#efeeeb}
+.story .copy{padding:28px}
+.story h3{font-size:1.7rem}
+.tag{font-size:.74rem;letter-spacing:.13em;text-transform:uppercase;display:block;margin-bottom:12px}
+.table-scroll{overflow:auto;border:1px solid var(--line);border-radius:12px}
+table{border-collapse:collapse;width:100%;min-width:620px;background:var(--white)}
+th,td{text-align:left;vertical-align:top;padding:18px 20px;border-bottom:1px solid var(--line)}
+thead{background:var(--ink);color:white}
+tbody tr:last-child td,tbody tr:last-child th{border-bottom:0}
+tbody th{width:24%}
+.faq-layout{display:grid;grid-template-columns:.8fr 1.4fr;gap:55px}
+details{border-top:1px solid var(--line);padding:19px 0}
+details:last-child{border-bottom:1px solid var(--line)}
+summary{cursor:pointer;font-weight:750;line-height:1.5}
+details p{margin:15px 0 0}
+.note{border-left:3px solid var(--ink);padding-left:18px}
+.end{margin-top:40px;background:var(--ink);color:var(--paper);padding:35px;border-radius:var(--radius);display:flex;align-items:center;justify-content:space-between;gap:25px}
+.end h2{font-size:1.8rem;margin-bottom:8px}
+.end p{margin:0}
+.end .button{background:var(--lime);color:var(--ink);flex-shrink:0}
+footer{padding:35px 0 40px;font-size:.84rem;color:var(--muted)}
+footer p{max-width:900px}
+footer .brand{color:var(--ink)}
+@media(min-width:850px){
+ .section{content-visibility:auto;contain-intrinsic-size:auto 650px}
+}
+@media(max-width:850px){
+ .categories{grid-template-columns:repeat(3,1fr)}
+ .hero{gap:25px}
+ .steps{grid-template-columns:1fr}
+ .answer{grid-template-columns:1fr;gap:14px}
+ .faq-layout{grid-template-columns:1fr;gap:10px}
+ .section-head{display:block}
+ .end{align-items:flex-start;flex-direction:column}
+}
+@media(max-width:600px){
+ .wrap{width:calc(100% - 28px)}
+ .masthead{align-items:flex-start;flex-direction:column;gap:4px}
+ .edition{font-size:.67rem}
+ .categories{grid-template-columns:repeat(2,minmax(0,1fr))}
+ .categories a{font-size:.81rem;padding:11px;min-height:58px}
+ .hero{grid-template-columns:1fr;padding:35px 0;gap:28px}
+ .hero figure{max-width:460px}
+ .journal{grid-template-columns:1fr}
+ .section{padding:42px 0}
+ .answer{padding:23px}
+ .story .copy{padding:23px}
+ .end{padding:25px}
+}
+</style>
+<script type="application/ld+json">
+{
+ "@context":"https://schema.org",
+ "@graph":[
+  {
+   "@type":"WebPage",
+   "@id":"#page",
+   "name":"ZentBuy spreadsheet : catégories, tailles et guide QC",
+   "inLanguage":"fr",
+   "description":"Un guide indépendant pour organiser une sélection, lire les photos QC et comparer le coût total avant une commande.",
+   "about":{"@type":"Thing","name":"ZentBuy spreadsheet"},
+   "hasPart":[
+    {"@id":"#article-tailles"},
+    {"@id":"#article-photos"},
+    {"@id":"#faq"}
+   ]
+  },
+  {
+   "@type":"Article",
+   "@id":"#article-tailles",
+   "headline":"Choisir une taille à partir de mesures utiles",
+   "inLanguage":"fr",
+   "articleSection":"Guide des tailles",
+   "author":{"@type":"Organization","name":"Rédaction hipobuyfind.com"},
+   "description":"Comparer la longueur du pied, les mesures d’un vêtement et le tableau propre à la référence pour préparer sa sélection."
+  },
+  {
+   "@type":"Article",
+   "@id":"#article-photos",
+   "headline":"Lire une image sans lui faire dire trop",
+   "inLanguage":"fr",
+   "articleSection":"Photos QC et matières",
+   "author":{"@type":"Organization","name":"Rédaction hipobuyfind.com"},
+   "description":"Distinguer une photographie de présentation d’une photo QC et vérifier les détails visibles sans en déduire une authenticité."
+  },
+  {
+   "@type":"FAQPage",
+   "@id":"#faq",
+   "inLanguage":"fr",
+   "mainEntity":[
+    {
+     "@type":"Question",
+     "name":"Qu’est-ce qu’un ZentBuy spreadsheet ?",
+     "acceptedAnswer":{
+      "@type":"Answer",
+      "text":"C’est une liste organisée de références que l’on souhaite examiner dans le contexte d’un achat via ZentBuy. Un tableau utile permet de retrouver la source, les variantes et les points à vérifier. Cette page est un guide éditorial, pas un tableur de stock en temps réel."
+     }
+    },
+    {
+     "@type":"Question",
+     "name":"Où mènent les liens de cette page ?",
+     "acceptedAnswer":{
+      "@type":"Answer",
+      "text":"Les liens de catégories ouvrent les rubriques correspondantes sur hipobuyfind.com. Tous les autres liens ouvrent la page d’accueil de www.hipobuyfind.com ; ils ne déclenchent aucune commande sur ZentBuy."
+     }
+    },
+    {
+     "@type":"Question",
+     "name":"Une photo QC garantit-elle l’authenticité ?",
+     "acceptedAnswer":{
+      "@type":"Answer",
+      "text":"Non. Une photo QC aide à examiner des détails visibles, comme la couleur ou les coutures. Elle ne remplace ni une preuve de provenance ni une vérification d’authenticité adaptée à l’article."
+     }
+    },
+    {
+     "@type":"Question",
+     "name":"Comment estimer le budget d’une commande ?",
+     "acceptedAnswer":{
+      "@type":"Answer",
+      "text":"Additionnez le prix confirmé de l’article, les frais éventuels de paiement et de transport, puis les coûts applicables à la destination. Vérifiez chaque poste au moment de payer ; cette page ne fournit pas de devis."
+     }
+    },
+    {
+     "@type":"Question",
+     "name":"Comment choisir entre deux tailles ?",
+     "acceptedAnswer":{
+      "@type":"Answer",
+      "text":"Comparez vos mesures au tableau de la référence exacte. Pour un vêtement, mesurez aussi une pièce qui vous va déjà. Si une mesure manque ou reste ambiguë, demandez une précision avant de commander."
+     }
+    },
+    {
+     "@type":"Question",
+     "name":"Ce guide est-il affilié aux marques présentées ?",
+     "acceptedAnswer":{
+      "@type":"Answer",
+      "text":"Non. Ce guide est indépendant de ZentBuy, Nike et Dior. Les visuels servent de références éditoriales ; ils n’attestent ni une disponibilité sur le site de destination ni un partenariat avec ces marques."
+     }
+    }
+   ]
+  }
+ ]
+}
+</script>
+<!--
+Fichier : index.html. Recherche éditoriale : 6 novembre 2026.
+L’accès direct à Google n’a pas abouti ; aucun classement Google de première page n’est revendiqué.
+Analyse de résultats publics : titres, extraits et pages accessibles, sans reprise des prix ni des promotions.
+
+Dix pages de référence et leurs thèmes SEO :
+1. zentbuy-spreadsheets.com/ — ZentBuy sheet, index, catégories, source produit.
+2. zentbuyspreadsheet.com/ — ZentBuy links, finds, sélection par catégorie.
+3. repsheet.net/spreadsheet/zentbuy — photos QC, liens, comparaison.
+4. qcradar.com/zentbuy-spreadsheet — poids du colis, coût, catégories.
+5. mixfittio.com/en/spreadsheet/zentbuy — parcours d’achat, frais, livraison.
+6. ssfinds.com/zentbuy-spreadsheet — tutoriel, photos, contrôle avant achat.
+7. grails.fit/zentbuy-spreadsheet — marques, photos QC, disponibilité.
+8. w2cspreadsheet.com/agents/zentbuy — entrepôt, frais, étapes.
+9. zentbuy-spreadsheet.com/ — finds, photos QC, guides d’expédition.
+10. zentbuy.org/ — finds, liens, suivi de la référence.
+Source primaire complémentaire : www.zentbuy.com, présentation des services.
+
+Axes secondaires :
+guide ZentBuy en français ;
+catégories ZentBuy ;
+photos QC ZentBuy ;
+tailles et mesures ZentBuy.
+
+Les requêtes de longue traîne sont intégrées aux conseils, sans liste artificielle ni promesse de classement.
+Aucune URL canonique inventée : renseigner l’URL propre à cette page après choix du domaine de publication.
+-->
+<link rel="canonical" href="https://kakobuyfinds.github.io/qqztb/">
+</head>
+<body>
+<header class="top">
+ <div class="wrap masthead">
+  <a class="brand" href="https://www.hipobuyfind.com">hipobuyfind.com</a>
+  <span class="edition">Le carnet de sélection · Édition française</span>
+ </div>
+</header>
+
+<main>
+ <nav class="category-section" aria-label="Catégories de vêtements et accessoires">
+  <div class="wrap">
+   <p class="section-label">Commencer par une catégorie</p>
+   <div class="categories">
+    <a href="https://hipobuyfind.com/category-911-Shoes.html">Chaussures <span aria-hidden="true">↗</span></a>
+    <a href="https://hipobuyfind.com/category-912-Hoodies%2FSweaters.html">Sweats et pulls <span aria-hidden="true">↗</span></a>
+    <a href="https://hipobuyfind.com/category-913-T-Shirts.html">T-shirts <span aria-hidden="true">↗</span></a>
+    <a href="https://hipobuyfind.com/category-914-Jackets.html">Vestes <span aria-hidden="true">↗</span></a>
+    <a href="https://hipobuyfind.com/category-915-Pants%2FShorts.html">Pantalons et shorts <span aria-hidden="true">↗</span></a>
+    <a href="https://hipobuyfind.com/category-916-Headwear.html">Casquettes et bonnets <span aria-hidden="true">↗</span></a>
+    <a href="https://hipobuyfind.com/category-917-Sets.html">Ensembles <span aria-hidden="true">↗</span></a>
+    <a href="https://hipobuyfind.com/category-918-underwear%2Funderpants.html">Sous-vêtements <span aria-hidden="true">↗</span></a>
+    <a href="https://hipobuyfind.com/category-919-Jersey.html">Maillots <span aria-hidden="true">↗</span></a>
+    <a href="https://hipobuyfind.com/category-920-Accessories.html">Accessoires <span aria-hidden="true">↗</span></a>
+   </div>
+  </div>
+ </nav>
+
+ <div class="wrap">
+  <section class="hero" aria-labelledby="titre">
+   <div>
+    <span class="eyebrow">ZentBuy spreadsheet · Guide indépendant</span>
+    <h1 id="titre">Moins d’hésitation.<br>Une sélection mieux pensée.</h1>
+    <p class="lead">Un <strong>ZentBuy spreadsheet</strong> devient utile quand chaque référence répond à une question : quelle coupe, quelle taille, quelles informations vérifier ? Ce carnet vous aide à transformer une envie en sélection réfléchie.</p>
+    <a class="button" href="https://www.hipobuyfind.com">Explorer Hipobuyfind <span aria-hidden="true">↗</span></a>
+    <p class="small" style="margin:16px 0 0">Guide en français. Les catégories ci-dessus ouvrent Hipobuyfind ; cette page ne passe aucune commande pour vous.</p>
+   </div>
+   <figure>
+    <img
+     src="https://static.nike.com/a/images/t_web_pdp_535_v2/f_auto,q_auto:eco/b7d9211c-26e7-431a-ac24-b0540fb3c00f/AIR%2BFORCE%2B1%2B%2707.png"
+     width="535"
+     height="535"
+     alt="Basket Nike Air Force 1 ’07 blanche, présentée sur fond clair"
+     fetchpriority="high"
+     loading="eager"
+     decoding="async">
+    <figcaption><strong>01 / La silhouette.</strong> Nike Air Force 1 ’07 : une référence visuelle pour réfléchir aux proportions. Illustration, sans offre de vente.</figcaption>
+   </figure>
+  </section>
+
+  <aside class="answer" aria-label="Définition rapide">
+   <h2>Un spreadsheet, à quoi ça sert ?</h2>
+   <p>À organiser des liens et des informations pour comparer des articles. Un tableau de sélection ne garantit ni le stock, ni la qualité, ni l’authenticité. Sa valeur tient à la clarté des références et aux vérifications qui précèdent l’achat.</p>
+  </aside>
+
+  <section class="section" aria-labelledby="methode">
+   <div class="section-head">
+    <h2 id="methode">Trois filtres avant le coup de cœur.</h2>
+    <p>Pour utiliser un guide ZentBuy en français, commencez par vos besoins plutôt que par une accumulation de liens.</p>
+   </div>
+   <div class="steps">
+    <article class="step">
+     <span class="number">01 / CLASSER</span>
+     <h3>Une catégorie, un usage</h3>
+     <p>Pour trouver des chaussures dans un ZentBuy spreadsheet, précisez d’abord l’usage : marche quotidienne, silhouette habillée ou tenue sportive. Pour comparer des sweats et pulls ZentBuy, pensez à la saison et à l’épaisseur souhaitée.</p>
+     <p>Une sélection de T-shirts par coupe et un repérage de vestes par matière donnent un point de départ plus précis qu’une simple recherche de marque.</p>
+    </article>
+    <article class="step">
+     <span class="number">02 / VÉRIFIER</span>
+     <h3>Des mesures, pas une intuition</h3>
+     <p>Un guide des tailles ZentBuy reste utile seulement s’il correspond au modèle choisi. Pour choisir une pointure en centimètres, comparez la longueur du pied à la mesure réellement indiquée : pied et semelle intérieure ne sont pas interchangeables.</p>
+     <p>Pour comparer un pantalon et un short, relevez le tour de taille, la longueur et l’aisance. Pour sélectionner un ensemble assorti, vérifiez séparément les mesures du haut et du bas.</p>
+    </article>
+    <article class="step">
+     <span class="number">03 / CONFIRMER</span>
+     <h3>Le détail qui change la décision</h3>
+     <p>Pour lire des photos QC ZentBuy, cherchez les zones utiles : coutures, étiquette de taille, fermeture et couleur. Comparer les variantes d’un article suppose aussi de vérifier la référence de la couleur sélectionnée.</p>
+     <p>Avant d’estimer le coût total d’une commande, confirmez le prix courant, le transport et les frais affichés. Un prix d’article seul ne décrit pas le budget final.</p>
+    </article>
+   </div>
+  </section>
+
+  <section class="section" aria-labelledby="journal">
+   <div class="section-head">
+    <h2 id="journal">Le journal des bons réflexes.</h2>
+    <p>Deux articles courts pour mieux lire les fiches et éviter les comparaisons trompeuses.</p>
+   </div>
+   <div class="journal">
+    <article class="story" id="article-tailles">
+     <img
+      src="https://static.nike.com/a/images/t_web_pdp_535_v2/f_auto,q_auto:eco/b7d9211c-26e7-431a-ac24-b0540fb3c00f/AIR%2BFORCE%2B1%2B%2707.png"
+      width="535"
+      height="401"
+      alt="Nike Air Force 1 ’07 blanche utilisée pour illustrer un article sur les pointures"
+      loading="lazy"
+      decoding="async">
+     <div class="copy">
+      <span class="tag">Article 01 · Tailles et mesures ZentBuy</span>
+      <h3>Choisir une taille à partir de mesures utiles</h3>
+      <p>Deux articles étiquetés « M » peuvent avoir des proportions différentes. Pour vérifier la longueur d’un T-shirt, mesurez une pièce que vous portez déjà à plat, selon la même méthode que le tableau du vendeur. Comparez ensuite la largeur de poitrine et la position des épaules.</p>
+      <p>Pour choisir un sweat à coupe ample, gardez en tête l’effet recherché : ample ne veut pas nécessairement dire plus long. Pour sélectionner une veste à superposer, prévoyez l’épaisseur du vêtement porté dessous.</p>
+      <p>Le même raisonnement aide à choisir un maillot par mesures, à vérifier le tour de tête d’une casquette et à comparer la taille de sous-vêtements. Une mesure manquante mérite une question, pas une supposition.</p>
+      <a href="https://www.hipobuyfind.com">Poursuivre la sélection sur Hipobuyfind ↗</a>
+     </div>
+    </article>
+
+    <article class="story" id="article-photos">
+     <img
+      src="https://assets.christiandior.com/is/image/diorprod/LOOK_F_25_2_LOOK_870_E09?wid=720&amp;hei=540&amp;fit=crop&amp;qlt=75"
+      width="720"
+      height="540"
+      alt="Silhouette Dior avec foulard imprimé et tenue aux tons clairs"
+      loading="lazy"
+      decoding="async">
+     <div class="copy">
+      <span class="tag">Article 02 · Photos QC et matières</span>
+      <h3>Lire une image sans lui faire dire trop</h3>
+      <p>Une image de campagne présente une intention de style. Une photo QC documente l’exemplaire photographié à un moment précis. Pour distinguer une photo vendeur d’une photo QC, recherchez le contexte de prise de vue et les informations associées.</p>
+      <p>Pour examiner les finitions d’un accessoire, zoomez sur les raccords, les bords et les attaches. Pour comparer la couleur d’un vêtement, tenez compte de l’éclairage et de l’écran. Une photo ne permet pas de confirmer seule la composition d’un tissu ou d’authentifier une marque.</p>
+      <p>Pour choisir un foulard selon ses dimensions ou vérifier la matière d’un bijou, demandez des indications écrites. Le visuel Dior sert ici de repère éditorial ; il ne décrit pas un produit disponible chez Hipobuyfind.</p>
+      <a href="https://www.hipobuyfind.com">Découvrir l’univers Hipobuyfind ↗</a>
+     </div>
+    </article>
+   </div>
+  </section>
+
+  <section class="section" aria-labelledby="comparaison">
+   <span class="eyebrow">Le mémo à garder sous les yeux</span>
+   <h2 id="comparaison">Comparer ce qui est comparable.</h2>
+   <p>Pour organiser une liste de favoris ZentBuy, gardez une ligne par référence et notez les informations encore à confirmer. Voici les champs les plus utiles.</p>
+   <div class="table-scroll" role="region" aria-label="Tableau de vérification avant sélection" tabindex="0">
+    <table>
+     <thead>
+      <tr>
+       <th scope="col">Famille</th>
+       <th scope="col">Information à comparer</th>
+       <th scope="col">Question à résoudre</th>
+      </tr>
+     </thead>
+     <tbody>
+      <tr>
+       <th scope="row">Chaussures</th>
+       <td>Référence, variante, tableau de pointures</td>
+       <td>La mesure indiquée correspond-elle au pied ou à la semelle ?</td>
+      </tr>
+      <tr>
+       <th scope="row">Hauts et vestes</th>
+       <td>Poitrine, longueur, épaules, composition</td>
+       <td>La coupe permet-elle de porter la tenue prévue ?</td>
+      </tr>
+      <tr>
+       <th scope="row">Bas et ensembles</th>
+       <td>Taille, entrejambe, mesures de chaque pièce</td>
+       <td>Le haut et le bas conviennent-ils tous les deux ?</td>
+      </tr>
+      <tr>
+       <th scope="row">Maillots et sous-vêtements</th>
+       <td>Mesures, matière, conditions de retour</td>
+       <td>Quelles conditions s’appliquent à la référence choisie ?</td>
+      </tr>
+      <tr>
+       <th scope="row">Coiffes et accessoires</th>
+       <td>Tour de tête, dimensions, attaches, matière</td>
+       <td>L’article est-il réglable et adapté à l’usage attendu ?</td>
+      </tr>
+     </tbody>
+    </table>
+   </div>
+   <p class="small" style="margin-top:18px">Pour repérer un lien produit indisponible, ouvrez la fiche et vérifiez la variante. Pour comparer les frais de livraison, utilisez le même pays de destination et les mêmes hypothèses de poids et de volume.</p>
+  </section>
+
+  <section class="section" aria-labelledby="budget">
+   <span class="eyebrow">Dossier pratique · Avant de commander</span>
+   <h2 id="budget">Construire un budget qui tient compte du trajet.</h2>
+   <p>Pour préparer une commande depuis la France, la Belgique, la Suisse ou le Canada, indiquez votre destination réelle au moment de demander une estimation. Deux lecteurs francophones peuvent avoir des coûts et des options de transport différents.</p>
+   <p>Pour calculer le budget d’une sélection ZentBuy, séparez le montant des articles du transport, des frais de paiement et des coûts éventuellement applicables à l’arrivée. Pour comparer le poids réel et le poids volumétrique, consultez la méthode annoncée par le transporteur choisi. L’emballage peut modifier l’estimation.</p>
+   <p class="note">Pour vérifier les conditions de retour avant paiement, consultez celles du vendeur et du service utilisé. Conservez la référence, la variante et les informations confirmées. Aucun délai de livraison, tarif ou avantage commercial n’est garanti par ce guide.</p>
+  </section>
+
+  <section class="section faq-layout" id="faq" aria-labelledby="questions">
+   <div>
+    <span class="eyebrow">Réponses directes</span>
+    <h2 id="questions">Les questions avant le clic.</h2>
+    <p>Le repère essentiel : un guide aide à comparer ; seule la fiche actuelle permet de confirmer les conditions d’une commande.</p>
+   </div>
+   <div>
+    <details open>
+     <summary>Qu’est-ce qu’un ZentBuy spreadsheet ?</summary>
+     <p>C’est une liste organisée de références que l’on souhaite examiner dans le contexte d’un achat via ZentBuy. Un tableau utile permet de retrouver la source, les variantes et les points à vérifier. Cette page est un guide éditorial, pas un tableur de stock en temps réel.</p>
+    </details>
+    <details>
+     <summary>Où mènent les liens de cette page ?</summary>
+     <p>Les liens de catégories ouvrent les rubriques correspondantes sur hipobuyfind.com. Tous les autres liens ouvrent la page d’accueil de www.hipobuyfind.com ; ils ne déclenchent aucune commande sur ZentBuy.</p>
+    </details>
+    <details>
+     <summary>Une photo QC garantit-elle l’authenticité ?</summary>
+     <p>Non. Une photo QC aide à examiner des détails visibles, comme la couleur ou les coutures. Elle ne remplace ni une preuve de provenance ni une vérification d’authenticité adaptée à l’article.</p>
+    </details>
+    <details>
+     <summary>Comment estimer le budget d’une commande ?</summary>
+     <p>Additionnez le prix confirmé de l’article, les frais éventuels de paiement et de transport, puis les coûts applicables à la destination. Vérifiez chaque poste au moment de payer ; cette page ne fournit pas de devis.</p>
+    </details>
+    <details>
+     <summary>Comment choisir entre deux tailles ?</summary>
+     <p>Comparez vos mesures au tableau de la référence exacte. Pour un vêtement, mesurez aussi une pièce qui vous va déjà. Si une mesure manque ou reste ambiguë, demandez une précision avant de commander.</p>
+    </details>
+    <details>
+     <summary>Ce guide est-il affilié aux marques présentées ?</summary>
+     <p>Non. Ce guide est indépendant de ZentBuy, Nike et Dior. Les visuels servent de références éditoriales ; ils n’attestent ni une disponibilité sur le site de destination ni un partenariat avec ces marques.</p>
+    </details>
+   </div>
+  </section>
+
+  <aside class="end">
+   <div>
+    <h2>Une envie. Une catégorie. Un choix éclairé.</h2>
+    <p>Continuez votre exploration sur Hipobuyfind.</p>
+   </div>
+   <a class="button" href="https://www.hipobuyfind.com">Ouvrir le catalogue <span aria-hidden="true">↗</span></a>
+  </aside>
+ </div>
+</main>
+
+<footer class="wrap">
+ <a class="brand" href="https://www.hipobuyfind.com">hipobuyfind.com</a>
+ <p>Le carnet de sélection · Rédaction hipobuyfind.com · <time datetime="2026-11-06">6 novembre 2026</time>.</p>
+ <p>Guide éditorial indépendant autour de ZentBuy spreadsheet. Les noms de marques identifient les références visuelles et restent la propriété de leurs titulaires. Aucune vente, disponibilité, authenticité ou association officielle n’est déduite des illustrations.</p>
+ <p>Repères documentaires : présentation des services ZentBuy ; thèmes de recherche « catégories », « photos QC » et « comparaison des références ». Visuels : Nike et Dior. Texte original en français.</p>
+</footer>
+</body>
+</html>
